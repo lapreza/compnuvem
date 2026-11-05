@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerência de Falhas: HA vs FT | Sistemas de Informação - Prof. Rafael Vainisckas Lapreza</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .content-body h1, .content-body h2, .content-body h3 {
+      font-family: 'Merriweather', serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <!-- Header Acadêmico -->
+  <header class="bg-slate-900 text-white border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-6 py-8">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4 mb-4">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Sistemas de Informação</span>
+          <p class="text-sm font-medium text-slate-300">Disciplina: Computação em Nuvem</p>
+        </div>
+        <div class="sm:text-right">
+          <span class="text-xs uppercase tracking-wider text-slate-400 block">Docente Responsável</span>
+          <span class="text-sm font-medium text-slate-200">Prof. Rafael Vainisckas Lapreza</span>
+        </div>
+      </div>
+      <a href="index.html" class="inline-flex items-center text-xs font-medium text-slate-400 hover:text-white transition-colors mt-2">
+        ← Voltar para a Plataforma Principal
+      </a>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full">
+    
+    <article class="bg-white p-8 sm:p-12 rounded-lg border border-slate-200 shadow-sm content-body space-y-10">
+      
+      <!-- Título da Aula Teórica -->
+      <header class="border-b border-slate-200 pb-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Material de Aprofundamento Teorico</span>
+        <h1 class="text-3xl font-bold text-slate-900 mt-2">Gerência de Falhas: Alta Disponibilidade (HA) e Tolerância a Falhas (FT)</h1>
+        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+          Compreensão aprofundada dos conceitos de resiliência, arquiteturas redundantes, SLAs de disponibilidade e as diferenças de engenharia entre sistemas HA e FT.
+        </p>
+      </header>
+
+      <!-- Seção 1: Introdução -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold text-slate-900">1. O Conceito de Resiliência em Computação em Nuvem</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Em ambientes distribuídos e na nuvem, a premissa fundamental de engenharia de software é que <strong>falhas vão acontecer</strong>. Sejam falhas físicas de hardware (queima de discos, falhas em switches), erros de software (bugs, vazamento de memória) ou eventos externos (corte de energia no data center), um sistema moderno precisa ser projetado para resistir a esses eventos sem impactar criticamente o negócio.
+        </p>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          A <strong>Gerência de Falhas</strong> abrange as práticas e arquiteturas empregadas para detectar, isolar e recuperar o ambiente diante de imprevistos. Para isso, divide-se o projeto em dois grandes pilares de resiliência: <em>Alta Disponibilidade (High Availability)</em> e <em>Tolerância a Falhas (Fault Tolerance)</em>.
+        </p>
+      </section>
+
+      <!-- Seção 2: Alta Disponibilidade -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-xl font-bold text-slate-900">2. Alta Disponibilidade (High Availability - HA)</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          A **Alta Disponibilidade (HA)** é a capacidade de um sistema permanecer acessível e operacional durante a maior porcentagem de tempo possível. O foco da arquitetura HA é **minimizar a Janela de Inatividade (Downtime)**. 
+        </p>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Em um sistema HA, se um componente falha, ocorre um processo de <strong>Failover</strong> (comutação de falha), no qual o tráfego é redirecionado para um componente secundário. Durante esse redirecionamento, pode haver uma pequena oscilação ou um brevíssimo tempo de inatividade (segundos a poucos minutos), mas o sistema se restabelece de forma automatizada.
+        </p>
+
+        <div class="bg-slate-50 p-6 rounded border border-slate-200 my-6 space-y-4">
+          <h3 class="text-md font-bold text-slate-900">Pilares de um Sistema HA:</h3>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+            <li><strong>Redundância Ativa/Passiva ou Ativa/Ativa:</strong> Existência de múltiplos nós ou servidores capazes de assumir a carga.</li>
+            <li><strong>Health Checks e Monitoramento:</strong> Mecanismos automáticos que checam constantemente se as instâncias estão respondendo corretamente.</li>
+            <li><strong>Balanceadores de Carga (Load Balancers):</strong> Dispositivos verticais ou virtuais que distribuem as requisições e isolam nós com falha.</li>
+            <li><strong>Eliminação de Pontos Únicos de Falha (SPOF - Single Point of Failure):</strong> Garantir que nenhuma peça isolada (ex: uma única placa de rede ou um único banco de dados) possa derrubar o sistema inteiro.</li>
+          </ul>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-900 mt-6">A Métrica dos "Novos 9s" e Acordos de Nível de Serviço (SLA)</h3>
+        <p class="text-slate-700 leading-relaxed text-sm">
+          A disponibilidade é medida percentualmente ao longo de um ano. A tabela abaixo detalha o tempo limite de inatividade aceitável para cada classe de SLA:
+        </p>
+
+        <div class="overflow-x-auto border border-slate-200 rounded my-4">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead class="bg-slate-900 text-white font-semibold">
+              <tr>
+                <th class="p-3">Disponibilidade (SLA)</th>
+                <th class="p-3">Classificação</th>
+                <th class="p-3">Downtime Tolerado por Ano</th>
+                <th class="p-3">Downtime Tolerado por Mês</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-700">
+              <tr>
+                <td class="p-3 font-semibold">99% ("Dois 9s")</td>
+                <td class="p-3">Básica</td>
+                <td class="p-3">3 dias e 15 horas</td>
+                <td class="p-3">7 horas e 18 min</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">99.9% ("Três 9s")</td>
+                <td class="p-3">Alta Disponibilidade Padrão</td>
+                <td class="p-3">8 horas e 45 minutos</td>
+                <td class="p-3">43 minutos</td>
+              </tr>
+              <tr class="bg-slate-50 font-medium">
+                <td class="p-3 font-semibold text-slate-900">99.99% ("Quatro 9s")</td>
+                <td class="p-3">Alta Disponibilidade Avançada</td>
+                <td class="p-3">52 minutos e 35 segundos</td>
+                <td class="p-3">4 minutos e 23 seg</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">99.999% ("Cinco 9s")</td>
+                <td class="p-3">Missão Crítica / Tolerante a Falhas</td>
+                <td class="p-3">5 minutos e 15 segundos</td>
+                <td class="p-3">26 segundos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Seção 3: Tolerância a Falhas -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-xl font-bold text-slate-900">3. Tolerância a Falhas (Fault Tolerance - FT)</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Enquanto a Alta Disponibilidade projeta o sistema para se **recuperar rapidamente** de um erro, a **Tolerância a Falhas (FT)** projeta a infraestrutura para **absorver a falha instantaneamente sem qualquer degradação de desempenho ou interrupção de serviço**.
+        </p>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Em uma arquitetura FT, se um processador, disco ou memória falhar, o hardware secundário espelhado assume no **mesmo ciclo de clock** ou sem que nenhuma sessão de usuário ou transação seja derrubada. Não existe *failover* perceptível: o tempo de inatividade é estritamente **Zero**.
+        </p>
+
+        <div class="bg-slate-50 p-6 rounded border border-slate-200 my-6 space-y-4">
+          <h3 class="text-md font-bold text-slate-900">Características Técnicas da Tolerância a Falhas:</h3>
+          <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+            <li><strong>Duplicação Estrita de Hardware:</strong> Utilização de fontes de alimentação redundantes, memórias ECC com espelhamento e CPUs em sincronia travada (*lockstep*).</li>
+            <li><strong>Replicação em Tempo Real (Lockstep Processing):</strong> Duas instâncias executam exatamente as mesmas instruções em paralelo simultaneamente.</li>
+            <li><strong>Custo Elevado:</strong> Manter recursos 100% duplicados em execução constante exige investimento financeiro e energético significativamente superior se comparado ao HA.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Seção 4: Tabela Comparativa -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-xl font-bold text-slate-900">4. Comparativo Direto: HA vs. FT</h2>
+        <p class="text-slate-700 leading-relaxed text-sm">
+          Abaixo estão listadas as diferenças fundamentais de engenharia entre os dois conceitos:
+        </p>
+
+        <div class="overflow-x-auto border border-slate-200 rounded my-4">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead class="bg-slate-100 border-b border-slate-200 font-semibold text-slate-900">
+              <tr>
+                <th class="p-3">Critério</th>
+                <th class="p-3">Alta Disponibilidade (HA)</th>
+                <th class="p-3">Tolerância a Falhas (FT)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-600">
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Objetivo Principal</td>
+                <td class="p-3">Minimizar o tempo de inatividade (*Downtime*).</td>
+                <td class="p-3">Zero inatividade e zero perda de estado/dados.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Tempo de Transição (Failover)</td>
+                <td class="p-3">Segundos a minutos (troca automatizada).</td>
+                <td class="p-3">Instantâneo (0 segundos / imperceptível).</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Complexidade / Custo</td>
+                <td class="p-3">Moderado / Acessível (Padrão de mercado).</td>
+                <td class="p-3">Extremamente Alto (Infraestrutura duplicada ativa).</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Tratamento de Sessão</td>
+                <td class="p-3">Pode exigir reautenticação do usuário.</td>
+                <td class="p-3">Sessão e estado na memória são mantidos intactos.</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Casos de Uso Típicos</td>
+                <td class="p-3">E-commerces, Portais Web, APIs SaaS corporativas.</td>
+                <td class="p-3">Sistemas bancários de compensação, controle aéreo, UTI hospitalar.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Seção 5: Aplicação na Nuvem -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-xl font-bold text-slate-900">5. Como Implementar em Provedores de Nuvem (AWS, Azure, GCP)</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Na nuvem pública, a implementação de Alta Disponibilidade é feita aproveitando a infraestrutura global dos provedores através da distribuição geográfica:
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-4 text-sm mt-4">
+          <div class="p-4 border border-slate-200 rounded bg-slate-50">
+            <h4 class="font-bold text-slate-900 mb-1">Zonas de Disponibilidade (AZs)</h4>
+            <p class="text-slate-600">
+              Implantar instâncias em múltiplas AZs dentro da mesma região. Se um data center físico sofrer uma enchente ou queda de energia, as instâncias da outra AZ assumem o tráfego via balanceador de carga.
+            </p>
+          </div>
+          <div class="p-4 border border-slate-200 rounded bg-slate-50">
+            <h4 class="font-bold text-slate-900 mb-1">Grupos de Auto Scaling</h4>
+            <p class="text-slate-600">
+              Políticas automatizadas que identificam quando uma VM deixa de responder aos *health checks*, destruindo a instância defeituosa e subindo uma nova saudável sem intervenção humana.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rodapé do Artigo -->
+      <footer class="border-t border-slate-200 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+        <span>Material Didático — Sistemas de Informação</span>
+        <a href="index.html" class="bg-slate-900 text-white px-4 py-2 rounded text-xs hover:bg-slate-800 transition-colors">
+          Voltar para a Plataforma e Fazer o Quiz
+        </a>
+      </footer>
+
+    </article>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+    <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <span>Sistemas de Informação — Computação em Nuvem</span>
+      <span>Prof. Rafael Vainisckas Lapreza</span>
+    </div>
+  </footer>
+
+</body>
+</html>

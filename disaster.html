@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Recovery, RTO e RPO | Sistemas de Informação - Prof. Rafael Vainisckas Lapreza</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .content-body h1, .content-body h2, .content-body h3 {
+      font-family: 'Merriweather', serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col antialiased">
+
+  <!-- Header Académico -->
+  <header class="bg-slate-900 text-white border-b border-slate-800">
+    <div class="max-w-4xl mx-auto px-6 py-8">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4 mb-4">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Sistemas de Informação</span>
+          <p class="text-sm font-medium text-slate-300">Disciplina: Computação em Nuvem</p>
+        </div>
+        <div class="sm:text-right">
+          <span class="text-xs uppercase tracking-wider text-slate-400 block">Docente Responsável</span>
+          <span class="text-sm font-medium text-slate-200">Prof. Rafael Vainisckas Lapreza</span>
+        </div>
+      </div>
+      <a href="index.html" class="inline-flex items-center text-xs font-medium text-slate-400 hover:text-white transition-colors mt-2">
+        ← Voltar para a Plataforma Principal
+      </a>
+    </div>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="max-w-4xl mx-auto px-6 py-10 flex-grow w-full">
+    
+    <article class="bg-white p-8 sm:p-12 rounded-lg border border-slate-200 shadow-sm content-body space-y-10">
+      
+      <!-- Cabeçalho do Artigo -->
+      <header class="border-b border-slate-200 pb-6">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Material de Aprofundamento Teórico</span>
+        <h1 class="text-3xl font-bold text-slate-900 mt-2">Disaster Recovery (DR) e Métricas de Resiliência: RTO e RPO</h1>
+        <p class="text-slate-600 text-sm mt-3 leading-relaxed">
+          Estudo detalhado das estratégias de recuperação de desastres em ambientes de nuvem e análise das métricas fundamentais que orientam o Planeamento de Continuidade de Negócios (BCP).
+        </p>
+      </header>
+
+      <!-- Seção 1: O que é DR -->
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold text-slate-900">1. O Conceito de Disaster Recovery (DR)</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          O **Disaster Recovery (Recuperação de Desastres)** abrange um conjunto estruturado de políticas, ferramentas e procedimentos operacionais concebidos para restaurar a infraestrutura de TI e os sistemas críticos após um evento catastrófico. 
+        </p>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Ao contrário da Alta Disponibilidade (que visa tratar falhas pontuais e locais de componentes), o plano de DR é projetado para cenários extremos: interrupção total de um data center, desastres naturais em toda uma região geográfica, ataques graves de *ransomware* ou falhas graves de governança operacional.
+        </p>
+      </section>
+
+      <!-- Seção 2: As Métricas RTO e RPO -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-xl font-bold text-slate-900">2. As Métricas Chave: RTO e RPO</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Para definir o sucesso e a viabilidade técnica de uma estratégia de recuperação de desastres, o negócio precisa definir matematicamente duas métricas orientadas ao tempo:
+        </p>
+
+        <!-- Cards RTO e RPO -->
+        <div class="grid sm:grid-cols-2 gap-6 my-6">
+          <div class="p-6 bg-slate-50 border-l-4 border-slate-900 rounded-r border-t border-b border-r border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 mb-2">RTO (Recovery Time Objective)</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-3">Tempo Máximo de Inatividade</span>
+            <p class="text-sm text-slate-700 leading-relaxed">
+              O **RTO** representa o tempo máximo tolerável que o sistema pode permanecer fora do ar (*offline*) após a ocorrência de uma falha grave sem causar danos irreversíveis ao negócio.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-600">
+              <strong>Foco:</strong> Velocidade de restauração dos serviços e aplicações.
+            </div>
+          </div>
+
+          <div class="p-6 bg-slate-50 border-l-4 border-slate-900 rounded-r border-t border-b border-r border-slate-200">
+            <h3 class="text-lg font-bold text-slate-900 mb-2">RPO (Recovery Point Objective)</h3>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-3">Volume Máximo de Perda de Dados</span>
+            <p class="text-sm text-slate-700 leading-relaxed">
+              O **RPO** mensura a quantidade máxima aceitável de dados perdidos durante um incidente, expressa em intervalo de tempo decorrido desde a última cópia/sincronização de segurança.
+            </p>
+            <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-600">
+              <strong>Foco:</strong> Frequência da replicação de dados e persistência.
+            </div>
+          </div>
+        </div>
+
+        <!-- Exemplo Prático -->
+        <div class="p-5 bg-slate-900 text-slate-100 rounded-lg space-y-2 my-4">
+          <h4 class="font-bold text-sm uppercase tracking-wider text-slate-300">Exemplo Prático de Aplicação:</h4>
+          <p class="text-sm leading-relaxed text-slate-300">
+            Imagine que um banco de dados sofre uma falha às **14:00**. O último backup automatizado ocorreu às **13:30**, e os serviços foram totalmente reestabelecidos no ambiente secundário às **14:15**.
+          </p>
+          <ul class="list-disc pl-5 text-xs space-y-1 text-slate-400 mt-2">
+            <li><strong>RPO Efetivo:</strong> 30 minutos de dados perdidos (das 13:30 às 14:00).</li>
+            <li><strong>RTO Efetivo:</strong> 15 minutos de paralisação total do sistema (das 14:00 às 14:15).</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Seção 3: Relação Custo vs Métricas -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-xl font-bold text-slate-900">3. Trade-off: Custo Financeiro vs. Rigor das Métricas</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Existe uma relação inversamente proporcional entre os valores de RTO/RPO e o custo de infraestrutura: <strong>quanto mais próximos de zero forem o RTO e o RPO, exponencialmente maior será o custo do ambiente na nuvem.</strong>
+        </p>
+
+        <div class="overflow-x-auto border border-slate-200 rounded my-4">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead class="bg-slate-100 border-b border-slate-200 font-semibold text-slate-900">
+              <tr>
+                <th class="p-3">Nível de Exigência</th>
+                <th class="p-3">Meta de RTO</th>
+                <th class="p-3">Meta de RPO</th>
+                <th class="p-3">Tecnologia Exigida</th>
+                <th class="p-3">Custo Relativo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 text-slate-600">
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Baixo (Sistemas internos)</td>
+                <td class="p-3">24 a 48 horas</td>
+                <td class="p-3">24 horas</td>
+                <td class="p-3">Backups diários armazenados em Object Storage (S3/GCS).</td>
+                <td class="p-3">Muito Baixo</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Médio (SaaS Corporativo)</td>
+                <td class="p-3">1 a 4 horas</td>
+                <td class="p-3">15 a 60 min</td>
+                <td class="p-3">Snapshots periódicos e réplicas de leitura (*Pilot Light*).</td>
+                <td class="p-3">Moderado</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Crítico (E-commerce / ERP)</td>
+                <td class="p-3">&lt; 15 minutos</td>
+                <td class="p-3">&lt; 1 minuto</td>
+                <td class="p-3">Replicação síncrona de banco de dados e instâncias prontas (*Warm Standby*).</td>
+                <td class="p-3">Elevado</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold text-slate-900">Missão Crítica (Financeiro)</td>
+                <td class="p-3">Próximo de 0</td>
+                <td class="p-3">Zero (0)</td>
+                <td class="p-3">Arquitetura Multi-Region *Active-Active* com gravação em tempo real.</td>
+                <td class="p-3">Extremamente Alto</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Seção 4: As 4 Estratégias de DR em Nuvem -->
+      <section class="space-y-4 border-t border-slate-100 pt-8">
+        <h2 class="text-xl font-bold text-slate-900">4. Estratégias de Implementação de DR na Nuvem</h2>
+        <p class="text-slate-700 leading-relaxed text-justify">
+          Os provedores de nuvem oferecem quatro abordagens arquiteturais padrão para o planejamento de Disaster Recovery:
+        </p>
+
+        <div class="space-y-4 text-sm text-slate-700 mt-4">
+          
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded">
+            <h3 class="font-bold text-slate-900 text-base mb-1">1. Backup and Restore (Backup e Restauração)</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Os dados e configurações são salvos periodicamente na nuvem secundária. Na ocorrência de uma catástrofe, toda a infraestrutura precisa ser provisionada do zero a partir das imagens e scripts guardados.
+            </p>
+            <span class="inline-block mt-2 text-xs font-semibold text-slate-800 bg-slate-200 px-2.5 py-0.5 rounded">RTO: Alto | RPO: Alto | Custo: Mínimo</span>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded">
+            <h3 class="font-bold text-slate-900 text-base mb-1">2. Pilot Light (Luz Piloto)</h3>
+            <p class="text-slate-600 leading-relaxed">
+              O núcleo de dados (bancos de dados e storage) é mantido em sincronia constante na região secundária. Os servidores de aplicação e computação permanecem desligados. No desastre, os servidores são ligados e escalados rapidamente.
+            </p>
+            <span class="inline-block mt-2 text-xs font-semibold text-slate-800 bg-slate-200 px-2.5 py-0.5 rounded">RTO: Moderado | RPO: Baixo | Custo: Baixo</span>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded">
+            <h3 class="font-bold text-slate-900 text-base mb-1">3. Warm Standby (Espera Aquecida)</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Uma cópia reduzida (em menor escala) de toda a infraestrutura está permanentemente em execução na região de backup. Quando ocorre a falha, o tráfego é redirecionado e o ambiente secundário faz o *Auto Scaling* para absorver 100% da carga.
+            </p>
+            <span class="inline-block mt-2 text-xs font-semibold text-slate-800 bg-slate-200 px-2.5 py-0.5 rounded">RTO: Baixo | RPO: Muito Baixo | Custo: Moderado/Alto</span>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded">
+            <h3 class="font-bold text-slate-900 text-base mb-1">4. Multi-Site Active-Active (Multi-Site Ativo-Ativo)</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Duas ou mais regiões da nuvem operam simultaneamente e dividem o tráfego de produção em tempo real por meio de roteamento por DNS ou Anycast. Se uma região inteira falhar, a outra continua recebendo as conexões sem qualquer pausa.
+            </p>
+            <span class="inline-block mt-2 text-xs font-semibold text-slate-800 bg-slate-200 px-2.5 py-0.5 rounded">RTO: Próximo de 0 | RPO: Próximo de 0 | Custo: Muito Elevado</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Rodapé do Artigo -->
+      <footer class="border-t border-slate-200 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+        <span>Material Didático — Sistemas de Informação</span>
+        <a href="index.html" class="bg-slate-900 text-white px-4 py-2 rounded text-xs hover:bg-slate-800 transition-colors">
+          Voltar para a Plataforma e Fazer o Quiz
+        </a>
+      </footer>
+
+    </article>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 mt-auto">
+    <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <span>Sistemas de Informação — Computação em Nuvem</span>
+      <span>Prof. Rafael Vainisckas Lapreza</span>
+    </div>
+  </footer>
+
+</body>
+</html>

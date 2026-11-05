@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computação em Nuvem - Sistemas de Informação</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-active {
+      border-bottom: 3px solid #0284c7;
+      color: #0284c7;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-brand-900 text-white shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center">
+      <div>
+        <span class="text-xs font-semibold tracking-wider uppercase text-brand-100 bg-brand-700/50 px-2.5 py-1 rounded">Computação em Nuvem</span>
+        <h1 class="text-2xl font-bold mt-2">Plataforma de Aprendizado & Avaliação</h1>
+      </div>
+      <div class="mt-4 md:mt-0 text-sm text-brand-100 bg-brand-700/30 px-4 py-2 rounded-lg border border-brand-700">
+        Prof. Rafael Vainisckas Lapreza
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 flex space-x-8">
+      <button onclick="switchTab('aula1')" id="tab-aula1" class="tab-btn py-4 px-2 text-slate-600 hover:text-brand-600 transition-colors tab-active">
+        Gerência de Falhas
+      </button>
+      <button onclick="switchTab('aula2')" id="tab-aula2" class="tab-btn py-4 px-2 text-slate-600 hover:text-brand-600 transition-colors">
+        Segurança em Nuvem
+      </button>
+      <button onclick="switchTab('avaliacao')" id="tab-avaliacao" class="tab-btn py-4 px-2 text-slate-600 hover:text-brand-600 transition-colors">
+        Avaliação Prática
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+
+    <!-- AULA 1 -->
+    <section id="content-aula1" class="tab-content space-y-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-brand-900 mb-4 pb-2 border-b">Parte 1: Gerência de Falhas e Continuidade de Negócios</h2>
+        
+        <p class="text-slate-600 mb-6 leading-relaxed">
+          Nesta aula, estudaremos como os sistemas em nuvem garantem a operação contínua mesmo diante de falhas de hardware, software ou desastres naturais.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 my-6">
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-lg mb-2 flex items-center">
+              Alta Disponibilidade (HA)
+            </h3>
+            <p class="text-sm text-slate-600 mb-3">
+              Minimiza o tempo de inatividade indevido (downtime). Focada em métricas como SLA de "99.99%" de disponibilidade por meio de redundância e balanceamento de carga.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-lg mb-2 flex items-center">
+              Tolerância a Falhas (FT)
+            </h3>
+            <p class="text-sm text-slate-600 mb-3">
+              Capacidade do sistema de continuar operando sem degradação ou interrupção perceptível, mesmo quando um ou mais componentes falham criticamente.
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <a href="altadisponibilidade.html" class="inline-flex items-center text-sm font-semibold text-brand-600 hover:text-brand-700 hover:underline">
+            Veja mais detalhes sobre Alta Disponibilidade e FT →
+          </a>
+        </div>
+
+        <h3 class="text-xl font-semibold text-slate-800 mt-6 mb-3">Disaster Recovery (DR) e Métricas Principais</h3>
+        <p class="text-slate-600 mb-4">Em um plano de recuperação de desastres, duas métricas regem a estratégia:</p>
+        
+        <div class="grid md:grid-cols-2 gap-4 mb-4">
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <strong class="text-brand-900 block">RTO (Recovery Time Objective):</strong>
+            <span class="text-sm text-slate-600">Tempo máximo tolerável que o sistema pode permanecer offline após uma falha.</span>
+          </div>
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <strong class="text-brand-900 block">RPO (Recovery Point Objective):</strong>
+            <span class="text-sm text-slate-600">Quantidade máxima tolerável de dados perdidos medida em tempo (ex: 5 minutos de dados).</span>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <a href="disaster.html" class="inline-flex items-center text-sm font-semibold text-brand-600 hover:text-brand-700 hover:underline">
+            Veja mais detalhes sobre Disaster Recovery e Métricas →
+          </a>
+        </div>
+
+        <h3 class="text-xl font-semibold text-slate-800 mt-8 mb-3">Estratégias de Disaster Recovery na Nuvem</h3>
+        <ul class="space-y-3 text-slate-600">
+          <li class="flex items-start"><span class="font-semibold text-brand-600 mr-2">1. Backup e Restore:</span> Custo baixo / RTO e RPO mais elevados.</li>
+          <li class="flex items-start"><span class="font-semibold text-brand-600 mr-2">2. Pilot Light:</span> Dados replicados continuamente; servidores desligados ativados sob demanda.</li>
+          <li class="flex items-start"><span class="font-semibold text-brand-600 mr-2">3. Warm Standby:</span> Versão reduzida da infraestrutura rodando constantemente na nuvem secundária.</li>
+          <li class="flex items-start"><span class="font-semibold text-brand-600 mr-2">4. Multi-Site (Active-Active):</span> Ambientes totalmente operacionais em paralelo dividindo a carga. RTO/RPO próximos de zero.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- AULA 2 -->
+    <section id="content-aula2" class="tab-content hidden space-y-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-brand-900 mb-4 pb-2 border-b">Aula 2: Segurança em Nuvem, IAM e Criptografia</h2>
+        
+        <p class="text-slate-600 mb-6 leading-relaxed">
+          Compreenda os pilares da proteção na nuvem: quem cuida do quê, como controlar acessos com rigor e como blindar dados sensíveis.
+        </p>
+
+        <h3 class="text-xl font-semibold text-slate-800 mb-3">Modelo de Responsabilidade Compartilhada</h3>
+        <div class="overflow-x-auto mb-6">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 border-b">
+                <th class="p-3">Modelo</th>
+                <th class="p-3">Responsabilidade do Provedor</th>
+                <th class="p-3">Responsabilidade do Cliente</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200">
+              <tr>
+                <td class="p-3 font-semibold">IaaS</td>
+                <td class="p-3 text-slate-600">Infraestrutura física, data center e virtualização</td>
+                <td class="p-3 text-slate-600">Sistema Operacional, Firewall, Aplicações e Dados</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">PaaS</td>
+                <td class="p-3 text-slate-600">Hardware, Sistema Operacional e Runtime da linguagem</td>
+                <td class="p-3 text-slate-600">Código da aplicação, dados e gestão de acessos</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-semibold">SaaS</td>
+                <td class="p-3 text-slate-600">Toda a infraestrutura, aplicação e manutenção</td>
+                <td class="p-3 text-slate-600">Gestão dos usuários e governança dos dados inseridos</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 my-6">
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-lg mb-2">IAM (Gestão de Identidade e Acesso)</h3>
+            <ul class="text-sm text-slate-600 space-y-2">
+              <li>• <strong>Princípio do Menor Privilégio:</strong> Conceder apenas os acessos estritamente necessários.</li>
+              <li>• <strong>Roles (Funções):</strong> Concessão de permissões temporárias sem chaves estáticas.</li>
+              <li>• <strong>MFA:</strong> Autenticação de dois fatores mandatória para contas críticas.</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+            <h3 class="font-bold text-slate-800 text-lg mb-2">Criptografia de Dados</h3>
+            <ul class="text-sm text-slate-600 space-y-2">
+              <li>• <strong>Dados em Repouso (Data at Rest):</strong> Criptografia de discos, bancos de dados e volumes (KMS).</li>
+              <li>• <strong>Dados em Trânsito (Data in Transit):</strong> Proteção de trafego em rede via HTTPS, TLS e VPNs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVALIAÇÃO -->
+    <section id="content-avaliacao" class="tab-content hidden space-y-6">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-brand-900 mb-2">Avaliação de Conhecimentos</h2>
+        <p class="text-slate-600 mb-6 border-b pb-4">Responda às questões abaixo e clique em "Enviar Respostas" ao final para ver seu resultado.</p>
+
+        <form id="quiz-form" onsubmit="evaluateQuiz(event)" class="space-y-8">
+          
+          <!-- Identificação do Aluno -->
+          <div class="bg-brand-50/40 p-4 rounded-lg border border-brand-100 grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-semibold text-slate-800 mb-1" for="student-name">Nome Completo do Aluno:</label>
+              <input type="text" id="student-name" required placeholder="Digite seu nome..." class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block font-semibold text-slate-800 mb-1" for="student-ra">RA / Matrícula:</label>
+              <input type="text" id="student-ra" required placeholder="Digite seu RA..." class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none">
+            </div>
+          </div>
+
+          <!-- Q1 -->
+          <div class="space-y-2">
+            <p class="font-semibold text-slate-800">1. Uma empresa precisa garantir que seus serviços continuem operando em outro servidor instantaneamente e sem perda de dados ou interrupção caso um hardware falhe. Qual é esse conceito?</p>
+            <div class="space-y-1 pl-2">
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q1" value="A" required> <span>(A) Alta Disponibilidade (High Availability)</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q1" value="B"> <span>(B) Tolerância a Falhas (Fault Tolerance)</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q1" value="C"> <span>(C) Recuperação de Desastres (Disaster Recovery)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="space-y-2">
+            <p class="font-semibold text-slate-800">2. Em Disaster Recovery, o que representa especificamente a métrica RPO (Recovery Point Objective)?</p>
+            <div class="space-y-1 pl-2">
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q2" value="A" required> <span>(A) O tempo total necessário para religar os servidores.</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q2" value="B"> <span>(B) A quantidade máxima aceitável de dados perdidos medida em tempo de alteração.</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q2" value="C"> <span>(C) O valor contratual do SLA garantido pelo provedor.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="space-y-2">
+            <p class="font-semibold text-slate-800">3. No Modelo de Responsabilidade Compartilhada em IaaS, qual tarefa é de responsabilidade EXCLUSIVA do cliente?</p>
+            <div class="space-y-1 pl-2">
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q3" value="A" required> <span>(A) Manutenção física dos data centers.</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q3" value="B"> <span>(B) Atualização de patches de segurança do Sistema Operacional e Firewall virtual.</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q3" value="C"> <span>(C) Troca de discos com defeito no rack do servidor.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="space-y-2">
+            <p class="font-semibold text-slate-800">4. Qual é a correta aplicação do Princípio do Menor Privilégio no IAM?</p>
+            <div class="space-y-1 pl-2">
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q4" value="A" required> <span>(A) Garantir que cada usuário receba apenas os privilégios estritamente necessários para sua função.</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q4" value="B"> <span>(B) Dar acesso de administrador a todos para agilizar os testes.</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q4" value="C"> <span>(C) Compartilhar a senha de superusuário com os desenvolvedores.</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="space-y-2">
+            <p class="font-semibold text-slate-800">5. A criptografia aplicada diretamente aos arquivos salvos em discos rígidos e bancos de dados refere-se a:</p>
+            <div class="space-y-1 pl-2">
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q5" value="A" required> <span>(A) Dados em trânsito (Data in Transit)</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q5" value="B"> <span>(B) Dados em repouso (Data at Rest)</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer text-slate-700">
+                <input type="radio" name="q5" value="C"> <span>(C) Protocolos TLS/HTTPS</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Q Dissertativa 1 -->
+          <div class="space-y-2 border-t pt-4">
+            <p class="font-semibold text-slate-800">6. (Dissertativa) Diferencie brevemente as estratégias de Disaster Recovery Pilot Light e Active-Active em termos de custo e RTO.</p>
+            <textarea id="qd1" rows="3" required class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="Digite sua resposta..."></textarea>
+          </div>
+
+          <!-- Q Dissertativa 2 -->
+          <div class="space-y-2 border-t pt-4">
+            <p class="font-semibold text-slate-800">7. (Dissertativa) Como o Modelo de Responsabilidade Compartilhada funciona em serviços PaaS e qual o papel do MFA na proteção do acesso do cliente?</p>
+            <textarea id="qd2" rows="3" required class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="Digite sua resposta..."></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-brand-600 text-white font-semibold py-3 rounded-lg hover:bg-brand-700 transition-colors shadow">
+            Enviar Respostas
+          </button>
+        </form>
+
+        <!-- Feedback Result Box -->
+        <div id="result-box" class="hidden mt-6 p-6 rounded-xl border"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-slate-800 text-slate-400 py-4 text-center text-xs mt-auto">
+    Plataforma de Treinamento em Computação em Nuvem • Hospedado no GitHub Pages
+  </footer>
+
+  <!-- Javascript das Abas e Correção/Envio -->
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
+      
+      document.getElementById('content-' + tabId).classList.remove('hidden');
+      document.getElementById('tab-' + tabId).classList.add('tab-active');
+    }
+
+    function evaluateQuiz(e) {
+      e.preventDefault();
+      
+      // Gabarito oficial das questões de múltipla escolha
+      const answers = { q1: 'B', q2: 'B', q3: 'B', q4: 'A', q5: 'B' };
+      let score = 0;
+      const form = e.target;
+      
+      // Captura dos dados do aluno
+      const studentName = document.getElementById('student-name').value;
+      const studentRa = document.getElementById('student-ra').value;
+
+      // Captura e verificação das respostas objetivas (Q1 a Q5)
+      const userAnswers = {};
+      for (let q in answers) {
+        const selected = form.querySelector(`input[name="${q}"]:checked`);
+        userAnswers[q] = selected ? selected.value : 'N/A';
+        if (selected && selected.value === answers[q]) {
+          score++;
+        }
+      }
+
+      // Captura das respostas dissertativas (Q6 e Q7)
+      const qd1Val = document.getElementById('qd1').value;
+      const qd2Val = document.getElementById('qd2').value;
+
+      // Cálculo da nota objetiva para a planilha
+      const finalScoreStr = `${score} de 5 (${(score / 5) * 100}%)`;
+
+      // === ENVIO AUTOMÁTICO PARA A PLANILHA DO GOOGLE SHEETS ===
+      const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLScgHqPtMRwiz-csmBWx5UohPnu7rImcTlR1EyAXoitG9XmZvA/formResponse";
+
+      const formData = new FormData();
+      formData.append("entry.463504496", studentName);     // NOME
+      formData.append("entry.800921320", studentRa);       // RA
+      formData.append("entry.1749669358", finalScoreStr);  // NOTA OBJETIVA
+      formData.append("entry.1567209791", userAnswers.q1); // RES1 (Q1)
+      formData.append("entry.938923197", userAnswers.q2);  // RES2 (Q2)
+      formData.append("entry.1963897641", userAnswers.q3); // RES3 (Q3)
+      formData.append("entry.2143277083", userAnswers.q4); // RES4 (Q4)
+      formData.append("entry.1379810232", userAnswers.q5); // RES5 (Q5)
+      formData.append("entry.436319025", qd1Val);          // RES6 (Dissertativa 1)
+      formData.append("entry.1981273042", qd2Val);         // RES7 (Dissertativa 2)
+
+      // Envio em segundo plano (silencioso e sem recarregar a página)
+      fetch(googleFormUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      }).then(() => {
+        console.log("Respostas enviadas com sucesso para o Google Sheets!");
+      }).catch(error => {
+        console.error("Erro ao enviar dados:", error);
+      });
+
+      // === FEEDBACK INSTANTÂNEO EXIBIDO AO ALUNO ===
+      const resultBox = document.getElementById('result-box');
+      resultBox.classList.remove('hidden');
+
+      resultBox.innerHTML = `
+        <div class="border-b border-slate-200 pb-3 mb-3">
+          <h3 class="font-bold text-slate-900 text-base">Comprovante de Envio</h3>
+          <p class="text-xs text-slate-600"><strong>Aluno:</strong> ${studentName} | <strong>RA:</strong> ${studentRa}</p>
+        </div>
+        
+        <div class="bg-slate-100 p-3 rounded mb-4">
+          <p class="text-sm font-semibold text-slate-900">
+            Desempenho na Parte Objetiva: <span class="text-slate-700">${finalScoreStr}</span>
+          </p>
+        </div>
+
+        <div class="space-y-3 text-xs text-slate-600 border-t border-slate-200 pt-3">
+          <p><strong>Sua resposta 6 (Dissertativa):</strong> ${qd1Val}</p>
+          <p><strong>Sua resposta 7 (Dissertativa):</strong> ${qd2Val}</p>
+          <div class="p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded font-medium text-xs mt-3 flex items-center gap-2">
+            <span>✓</span> Suas respostas foram salvas e enviadas com sucesso para a planilha do Prof. Rafael Vainisckas Lapreza!
+          </div>
+        </div>
+      `;
+
+      resultBox.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
